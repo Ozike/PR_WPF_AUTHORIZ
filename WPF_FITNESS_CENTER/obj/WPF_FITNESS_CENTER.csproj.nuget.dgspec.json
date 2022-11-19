@@ -1,0 +1,86 @@
+{
+  "format": 1,
+  "restore": {
+    "C:\\Users\\Сергей\\source\\repos\\WPF_FITNESS_CENTER\\WPF_FITNESS_CENTER.csproj": {}
+  },
+  "projects": {
+    "C:\\Users\\Сергей\\source\\repos\\Hash\\Hash.csproj": {
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Сергей\\source\\repos\\Hash\\Hash.csproj",
+        "projectName": "Hash",
+        "projectPath": "C:\\Users\\Сергей\\source\\repos\\Hash\\Hash.csproj",
+        "frameworks": {
+          "net48": {
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "net48": {}
+      }
+    },
+    "C:\\Users\\Сергей\\source\\repos\\WPF_FITNESS_CENTER\\WPF_FITNESS_CENTER.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Сергей\\source\\repos\\WPF_FITNESS_CENTER\\WPF_FITNESS_CENTER.csproj",
+        "projectName": "WPF_FITNESS_CENTER",
+        "projectPath": "C:\\Users\\Сергей\\source\\repos\\WPF_FITNESS_CENTER\\WPF_FITNESS_CENTER.csproj",
+        "packagesPath": "C:\\Users\\Сергей\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Сергей\\source\\repos\\WPF_FITNESS_CENTER\\obj\\",
+        "projectStyle": "PackageReference",
+        "skipContentFileWrite": true,
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages",
+          "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\Сергей\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net48"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net48": {
+            "projectReferences": {
+              "C:\\Users\\Сергей\\source\\repos\\Hash\\Hash.csproj": {
+                "projectPath": "C:\\Users\\Сергей\\source\\repos\\Hash\\Hash.csproj"
+              }
+            }
+          }
+        }
+      },
+      "frameworks": {
+        "net48": {
+          "dependencies": {
+            "EntityFramework": {
+              "target": "Package",
+              "version": "[6.2.0, )"
+            },
+            "EntityFramework.ru": {
+              "target": "Package",
+              "version": "[6.2.0, )"
+            }
+          }
+        }
+      },
+      "runtimes": {
+        "win": {
+          "#import": []
+        },
+        "win-x64": {
+          "#import": []
+        },
+        "win-x86": {
+          "#import": []
+        }
+      }
+    }
+  }
+}

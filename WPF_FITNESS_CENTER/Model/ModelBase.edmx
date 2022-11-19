@@ -1,0 +1,448 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище Fitness_centerModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Coach">
+          <Key>
+            <PropertyRef Name="ID_coach" />
+          </Key>
+          <Property Name="ID_coach" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Last_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Middle_name" Type="varchar" MaxLength="50" />
+          <Property Name="telephone_number" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address_mail" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Login" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="300" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Conference">
+          <Key>
+            <PropertyRef Name="ID_conference" />
+          </Key>
+          <Property Name="ID_conference" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name_conference" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="ID_coach" Type="int" Nullable="false" />
+          <Property Name="ID_Moderator" Type="int" Nullable="false" />
+          <Property Name="ID_Organizator" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "20.101-4-Fitness_center.dbo.Conference_participant" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="Conference_participant">
+          <Key>
+            <PropertyRef Name="ID_conference" />
+            <PropertyRef Name="ID_participant" />
+          </Key>
+          <Property Name="ID_conference" Type="int" Nullable="false" />
+          <Property Name="ID_participant" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Moderator">
+          <Key>
+            <PropertyRef Name="ID_moderator" />
+          </Key>
+          <Property Name="ID_moderator" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Last_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Middle_name" Type="varchar" MaxLength="50" />
+          <Property Name="telephone_number" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address_mail" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Login" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="300" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Organizator">
+          <Key>
+            <PropertyRef Name="ID_organizator" />
+          </Key>
+          <Property Name="ID_organizator" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Last_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Middle_name" Type="varchar" MaxLength="50" />
+          <Property Name="telephone_number" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address_mail" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Login" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="300" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Participant">
+          <Key>
+            <PropertyRef Name="ID_participant" />
+          </Key>
+          <Property Name="ID_participant" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Last_name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Middle_name" Type="varchar" MaxLength="50" />
+          <Property Name="telephone_number" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address_mail" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Login" Type="varchar" MaxLength="30" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="300" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <Association Name="FK_Conference_Coach">
+          <End Role="Coach" Type="Self.Coach" Multiplicity="1" />
+          <End Role="Conference" Type="Self.Conference" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Coach">
+              <PropertyRef Name="ID_coach" />
+            </Principal>
+            <Dependent Role="Conference">
+              <PropertyRef Name="ID_coach" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Conference_Moderator">
+          <End Role="Moderator" Type="Self.Moderator" Multiplicity="1" />
+          <End Role="Conference" Type="Self.Conference" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Moderator">
+              <PropertyRef Name="ID_moderator" />
+            </Principal>
+            <Dependent Role="Conference">
+              <PropertyRef Name="ID_Moderator" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Conference_Organizator">
+          <End Role="Organizator" Type="Self.Organizator" Multiplicity="1" />
+          <End Role="Conference" Type="Self.Conference" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organizator">
+              <PropertyRef Name="ID_organizator" />
+            </Principal>
+            <Dependent Role="Conference">
+              <PropertyRef Name="ID_Organizator" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Conference_participant_Conference">
+          <End Role="Conference" Type="Self.Conference" Multiplicity="1" />
+          <End Role="Conference_participant" Type="Self.Conference_participant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Conference">
+              <PropertyRef Name="ID_conference" />
+            </Principal>
+            <Dependent Role="Conference_participant">
+              <PropertyRef Name="ID_conference" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Conference_participant_Participant">
+          <End Role="Participant" Type="Self.Participant" Multiplicity="1" />
+          <End Role="Conference_participant" Type="Self.Conference_participant" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Participant">
+              <PropertyRef Name="ID_participant" />
+            </Principal>
+            <Dependent Role="Conference_participant">
+              <PropertyRef Name="ID_participant" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище Fitness_centerModelContainer">
+          <EntitySet Name="Coach" EntityType="Self.Coach" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Conference" EntityType="Self.Conference" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Moderator" EntityType="Self.Moderator" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Organizator" EntityType="Self.Organizator" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Participant" EntityType="Self.Participant" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Conference_participant" EntityType="Self.Conference_participant" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Conference_participant].[ID_conference] AS [ID_conference], 
+    [Conference_participant].[ID_participant] AS [ID_participant]
+    FROM [dbo].[Conference_participant] AS [Conference_participant]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Conference_Coach" Association="Self.FK_Conference_Coach">
+            <End Role="Coach" EntitySet="Coach" />
+            <End Role="Conference" EntitySet="Conference" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Conference_Moderator" Association="Self.FK_Conference_Moderator">
+            <End Role="Moderator" EntitySet="Moderator" />
+            <End Role="Conference" EntitySet="Conference" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Conference_Organizator" Association="Self.FK_Conference_Organizator">
+            <End Role="Organizator" EntitySet="Organizator" />
+            <End Role="Conference" EntitySet="Conference" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Conference_participant_Conference" Association="Self.FK_Conference_participant_Conference">
+            <End Role="Conference" EntitySet="Conference" />
+            <End Role="Conference_participant" EntitySet="Conference_participant" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Conference_participant_Participant" Association="Self.FK_Conference_participant_Participant">
+            <End Role="Participant" EntitySet="Participant" />
+            <End Role="Conference_participant" EntitySet="Conference_participant" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Fitness_centerModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Coach">
+          <Key>
+            <PropertyRef Name="ID_coach" />
+          </Key>
+          <Property Name="ID_coach" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Middle_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="telephone_number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address_mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Login" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Conference" Relationship="Self.FK_Conference_Coach" FromRole="Coach" ToRole="Conference" />
+        </EntityType>
+        <EntityType Name="Conference">
+          <Key>
+            <PropertyRef Name="ID_conference" />
+          </Key>
+          <Property Name="ID_conference" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name_conference" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ID_coach" Type="Int32" Nullable="false" />
+          <Property Name="ID_Moderator" Type="Int32" Nullable="false" />
+          <Property Name="ID_Organizator" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Coach" Relationship="Self.FK_Conference_Coach" FromRole="Conference" ToRole="Coach" />
+          <NavigationProperty Name="Moderator" Relationship="Self.FK_Conference_Moderator" FromRole="Conference" ToRole="Moderator" />
+          <NavigationProperty Name="Organizator" Relationship="Self.FK_Conference_Organizator" FromRole="Conference" ToRole="Organizator" />
+          <NavigationProperty Name="Participant" Relationship="Self.Conference_participant" FromRole="Conference" ToRole="Participant" />
+        </EntityType>
+        <EntityType Name="Moderator">
+          <Key>
+            <PropertyRef Name="ID_moderator" />
+          </Key>
+          <Property Name="ID_moderator" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Middle_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="telephone_number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address_mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Login" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Conference" Relationship="Self.FK_Conference_Moderator" FromRole="Moderator" ToRole="Conference" />
+        </EntityType>
+        <EntityType Name="Organizator">
+          <Key>
+            <PropertyRef Name="ID_organizator" />
+          </Key>
+          <Property Name="ID_organizator" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Middle_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="telephone_number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address_mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Login" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Conference" Relationship="Self.FK_Conference_Organizator" FromRole="Organizator" ToRole="Conference" />
+        </EntityType>
+        <EntityType Name="Participant">
+          <Key>
+            <PropertyRef Name="ID_participant" />
+          </Key>
+          <Property Name="ID_participant" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Last_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Middle_name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="telephone_number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address_mail" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Login" Type="String" MaxLength="30" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="300" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="Conference" Relationship="Self.Conference_participant" FromRole="Participant" ToRole="Conference" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <Association Name="FK_Conference_Coach">
+          <End Role="Coach" Type="Self.Coach" Multiplicity="1" />
+          <End Role="Conference" Type="Self.Conference" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Coach">
+              <PropertyRef Name="ID_coach" />
+            </Principal>
+            <Dependent Role="Conference">
+              <PropertyRef Name="ID_coach" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Conference_Moderator">
+          <End Role="Moderator" Type="Self.Moderator" Multiplicity="1" />
+          <End Role="Conference" Type="Self.Conference" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Moderator">
+              <PropertyRef Name="ID_moderator" />
+            </Principal>
+            <Dependent Role="Conference">
+              <PropertyRef Name="ID_Moderator" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Conference_Organizator">
+          <End Role="Organizator" Type="Self.Organizator" Multiplicity="1" />
+          <End Role="Conference" Type="Self.Conference" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organizator">
+              <PropertyRef Name="ID_organizator" />
+            </Principal>
+            <Dependent Role="Conference">
+              <PropertyRef Name="ID_Organizator" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="Conference_participant">
+          <End Role="Conference" Type="Self.Conference" Multiplicity="*" />
+          <End Role="Participant" Type="Self.Participant" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Coach" EntityType="Self.Coach" />
+          <EntitySet Name="Conference" EntityType="Self.Conference" />
+          <EntitySet Name="Moderator" EntityType="Self.Moderator" />
+          <EntitySet Name="Organizator" EntityType="Self.Organizator" />
+          <EntitySet Name="Participant" EntityType="Self.Participant" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <AssociationSet Name="FK_Conference_Coach" Association="Self.FK_Conference_Coach">
+            <End Role="Coach" EntitySet="Coach" />
+            <End Role="Conference" EntitySet="Conference" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Conference_Moderator" Association="Self.FK_Conference_Moderator">
+            <End Role="Moderator" EntitySet="Moderator" />
+            <End Role="Conference" EntitySet="Conference" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Conference_Organizator" Association="Self.FK_Conference_Organizator">
+            <End Role="Organizator" EntitySet="Organizator" />
+            <End Role="Conference" EntitySet="Conference" />
+          </AssociationSet>
+          <AssociationSet Name="Conference_participant" Association="Self.Conference_participant">
+            <End Role="Conference" EntitySet="Conference" />
+            <End Role="Participant" EntitySet="Participant" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище Fitness_centerModelContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="Coach">
+            <EntityTypeMapping TypeName="Fitness_centerModel.Coach">
+              <MappingFragment StoreEntitySet="Coach">
+                <ScalarProperty Name="ID_coach" ColumnName="ID_coach" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Last_name" ColumnName="Last_name" />
+                <ScalarProperty Name="Middle_name" ColumnName="Middle_name" />
+                <ScalarProperty Name="telephone_number" ColumnName="telephone_number" />
+                <ScalarProperty Name="Address_mail" ColumnName="Address_mail" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Conference">
+            <EntityTypeMapping TypeName="Fitness_centerModel.Conference">
+              <MappingFragment StoreEntitySet="Conference">
+                <ScalarProperty Name="ID_conference" ColumnName="ID_conference" />
+                <ScalarProperty Name="Name_conference" ColumnName="Name_conference" />
+                <ScalarProperty Name="ID_coach" ColumnName="ID_coach" />
+                <ScalarProperty Name="ID_Moderator" ColumnName="ID_Moderator" />
+                <ScalarProperty Name="ID_Organizator" ColumnName="ID_Organizator" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Moderator">
+            <EntityTypeMapping TypeName="Fitness_centerModel.Moderator">
+              <MappingFragment StoreEntitySet="Moderator">
+                <ScalarProperty Name="ID_moderator" ColumnName="ID_moderator" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Last_name" ColumnName="Last_name" />
+                <ScalarProperty Name="Middle_name" ColumnName="Middle_name" />
+                <ScalarProperty Name="telephone_number" ColumnName="telephone_number" />
+                <ScalarProperty Name="Address_mail" ColumnName="Address_mail" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Organizator">
+            <EntityTypeMapping TypeName="Fitness_centerModel.Organizator">
+              <MappingFragment StoreEntitySet="Organizator">
+                <ScalarProperty Name="ID_organizator" ColumnName="ID_organizator" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Last_name" ColumnName="Last_name" />
+                <ScalarProperty Name="Middle_name" ColumnName="Middle_name" />
+                <ScalarProperty Name="telephone_number" ColumnName="telephone_number" />
+                <ScalarProperty Name="Address_mail" ColumnName="Address_mail" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Participant">
+            <EntityTypeMapping TypeName="Fitness_centerModel.Participant">
+              <MappingFragment StoreEntitySet="Participant">
+                <ScalarProperty Name="ID_participant" ColumnName="ID_participant" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Last_name" ColumnName="Last_name" />
+                <ScalarProperty Name="Middle_name" ColumnName="Middle_name" />
+                <ScalarProperty Name="telephone_number" ColumnName="telephone_number" />
+                <ScalarProperty Name="Address_mail" ColumnName="Address_mail" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Fitness_centerModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="Conference_participant" TypeName="Fitness_centerModel.Conference_participant" StoreEntitySet="Conference_participant">
+            <EndProperty Name="Conference">
+              <ScalarProperty Name="ID_conference" ColumnName="ID_conference" />
+            </EndProperty>
+            <EndProperty Name="Participant">
+              <ScalarProperty Name="ID_participant" ColumnName="ID_participant" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "ytZE+SiKpEiyYdtilUYP5ew6DJIVNgeIuPB5tBMRz9RWEnF0+UKSCB9XqqltUk/ndH9zIbAWtpu0MkoUDwWJHw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Сергей\\source\\repos\\WPF_FITNESS_CENTER\\WPF_FITNESS_CENTER.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Сергей\\.nuget\\packages\\entityframework\\6.2.0\\entityframework.6.2.0.nupkg.sha512",
+    "C:\\Users\\Сергей\\.nuget\\packages\\entityframework.ru\\6.2.0\\entityframework.ru.6.2.0.nupkg.sha512"
+  ],
+  "logs": []
+}
